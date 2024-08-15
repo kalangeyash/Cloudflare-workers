@@ -11,8 +11,32 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+// export default {
+// 	async fetch(request, env, ctx): Promise<Response> {
+// 		return new  Response('Hello World!');
+// 	},
+// } satisfies ExportedHandler<Env>;
+//  export interface Env{
+
+//  }
+
 export default {
-	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
-	},
-} satisfies ExportedHandler<Env>;
+	async fetch(request:Request , env :Env , ctx : ExecutionContext): Promise<Response> {
+		console.log(request.body);
+		console.log(request.headers);
+		
+		if(request.method == "GET")
+		{ 
+			return Response.json({
+				message : "you sent a get request"
+			})
+
+		}
+		else {
+			return Response.json({
+				message : "you didnt send a request"
+			})
+		}
+	}
+	
+}
